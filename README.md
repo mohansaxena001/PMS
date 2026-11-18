@@ -1,47 +1,170 @@
-# ParkEase
+# ParkEase 🚗
+### Smart Parking Management System
 
-A local parking management web app: view availability of 50 spots, register vehicles (automatic spot allocation, optional manual change), search by number plate, and release vehicles with confirmation.
+ParkEase is a web-based parking management application built using Python, Flask, and SQLite. It helps manage parking availability, vehicle registration, parking allocation, vehicle search, and spot release through a simple and interactive dashboard.
 
-## Features
-- Dashboard with 50 spots (P01-P50): green = available, red = occupied; total / available / occupied counts read from SQLite
-- Register a vehicle (official number-plate registration number, owner's name, mobile number) with automatic first-free-spot allocation
-- Move a vehicle to another currently available spot
-- Search by registration number (case, spaces and hyphens ignored)
-- Release by search result or by clicking an occupied spot; always asks for confirmation; the vehicle record is deleted (no history kept)
+The application is designed to run locally on a computer through a web browser.
 
-## Technology
-Python 3.9+, Flask, SQLite (built-in `sqlite3`), Jinja templates, HTML, CSS, vanilla JavaScript.
+---
 
-## Structure
-```
+## ✨ Features
+
+- **Interactive Dashboard:** Displays all 50 parking spots with real-time availability information.
+- **Visual Parking Status:** Green indicates available spots, while red indicates occupied spots.
+- **Parking Statistics:** Displays total, available, and occupied parking spots.
+- **Vehicle Registration:** Register vehicles using their official number-plate registration number, owner's name, and mobile number.
+- **Automatic Allocation:** Automatically assigns the first available parking spot.
+- **Manual Reassignment:** Allows users to change the allocated spot to another available spot.
+- **Vehicle Search:** Search for parked vehicles using their registration number.
+- **Vehicle Information:** View vehicle details and assigned parking location.
+- **Vehicle Release:** Release vehicles through either the search page or the dashboard.
+- **Database Management:** Stores active vehicle and parking allocation information using SQLite.
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Backend logic and validation |
+| Flask | Web application framework |
+| SQLite | Database management |
+| HTML | Webpage structure |
+| CSS | Styling and responsive design |
+| JavaScript | Frontend interactions |
+| Jinja | Dynamic HTML rendering |
+
+## 📁 Project Structure
+
+```text
 ParkEase/
-├── app.py            routes, validation, messages
-├── database.py       ALL SQL, transactions, shared DB functions
-├── schema.sql        tables + constraints
-├── requirements.txt  Flask
-├── templates/        base, index, register, search, vehicle, confirm_release, error
-├── static/           style.css, script.js
-├── tests/            test_database.py, test_routes.py
-└── PROJECT_CONTEXT.md, DESIGN_DECISIONS.md, VIVA_PREPARATION.md
+│
+├── app.py
+├── database.py
+├── schema.sql
+├── requirements.txt
+├── .gitignore
+│
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── register.html
+│   └── search.html
+│
+├── static/
+│   ├── style.css
+│   └── script.js
+│
+├── tests/
+│   ├── test_database.py
+│   └── test_routes.py
+│
+├── README.md
+├── PROJECT_CONTEXT.md
+├── DESIGN_DECISIONS.md
+└── VIVA_PREPARATION.md
 ```
 
-## Setup and run
+## ⚙️ Installation and Setup
+
+### 1. Clone the repository
+
+```bash
+git clone <YOUR_REPOSITORY_URL>
+```
+
+Navigate into the project directory:
+
 ```bash
 cd ParkEase
-python -m venv venv
-venv\Scripts\activate          # Windows   (macOS/Linux: source venv/bin/activate)
-pip install -r requirements.txt
-python app.py
 ```
-Open http://127.0.0.1:5000 . The file `parkease.db` is created automatically on first run (it is git-ignored).
 
-## Run the tests
+### 2. Create a virtual environment
+
 ```bash
-python -m unittest discover -s tests -v
+python3 -m venv .venv
 ```
-Tests use temporary databases, never `parkease.db`.
 
-## Notes
-- Registration numbers are stored normalized (uppercase, no spaces/hyphens), e.g. `DL8CAB1234`; mobile numbers as 10 digits.
-- To start fresh, stop the app and delete `parkease.db`.
-- Set `PARKEASE_SECRET` to a random string if you ever deploy beyond a laptop.
+Activate it:
+
+**macOS / Linux**
+
+```bash
+source .venv/bin/activate
+```
+
+**Windows**
+
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the application
+
+```bash
+python3 app.py
+```
+
+Open the local address displayed in your terminal, usually:
+
+```text
+http://127.0.0.1:5000
+```
+
+The SQLite database and initial parking spots should be initialized automatically by the application.
+
+## 🚘 How to Use ParkEase
+
+1. Open the dashboard to view all 50 parking spots.
+2. Navigate to **Register Vehicle** to register a vehicle.
+3. Enter the vehicle's official number-plate registration number, owner's name, and mobile number.
+4. The application automatically allocates the first available parking spot.
+5. If needed, select another available spot.
+6. Use **Search Vehicle** to find a currently parked vehicle.
+7. Click an occupied parking spot to view its associated vehicle.
+8. Release a vehicle after confirming the action.
+
+Once a vehicle is released, its parking spot becomes available again.
+
+## 🗄️ Database Design
+
+ParkEase uses SQLite with two primary tables:
+
+**parking_spots**
+- Stores the 50 parking spot identifiers.
+- Each spot has a unique identifier.
+
+**vehicles**
+- Stores currently registered vehicles.
+- Contains the vehicle registration number, owner's name, mobile number, and assigned parking spot.
+
+Parking occupancy is derived from vehicle allocations rather than maintained using a separate status column.
+
+Database constraints help prevent:
+- Duplicate active vehicle registration numbers.
+- Multiple active allocations for one mobile number.
+- Multiple vehicles occupying the same parking spot.
+
+Released vehicle records are deleted. The application does not maintain parking history.
+
+## 🔒 Data and Application Scope
+
+- Parking capacity is fixed at 50 spots.
+- Only one active vehicle can be associated with a mobile number.
+- Each active vehicle has exactly one parking spot.
+- Released vehicles can register again.
+- No login or authentication system is included.
+- No payment system or parking history is maintained.
+- The application is intended for local use.
+
+## 🎯 Project Objective
+
+The objective of ParkEase is to demonstrate how a simple full-stack web application can combine frontend development, backend programming, database management, and software testing to solve a practical parking management problem.
+
+---
+
+**ParkEase — Making Parking Management Simpler.** 🚗
