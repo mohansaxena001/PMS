@@ -1,4 +1,4 @@
-# ParkEase 🚗
+# ParkEase
 ### Smart Parking Management System
 
 ParkEase is a web-based parking management application built using Python, Flask, and SQLite. It helps manage parking availability, vehicle registration, parking allocation, vehicle search, and spot release through a simple and interactive dashboard.
@@ -7,7 +7,7 @@ The application is designed to run locally on a computer through a web browser.
 
 ---
 
-## ✨ Features
+## Features
 
 - **Interactive Dashboard:** Displays all 50 parking spots with real-time availability information.
 - **Visual Parking Status:** Green indicates available spots, while red indicates occupied spots.
@@ -20,7 +20,7 @@ The application is designed to run locally on a computer through a web browser.
 - **Vehicle Release:** Release vehicles through either the search page or the dashboard.
 - **Database Management:** Stores active vehicle and parking allocation information using SQLite.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Technology | Purpose |
 |---|---|
@@ -32,7 +32,7 @@ The application is designed to run locally on a computer through a web browser.
 | JavaScript | Frontend interactions |
 | Jinja | Dynamic HTML rendering |
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 ParkEase/
@@ -63,61 +63,7 @@ ParkEase/
 └── VIVA_PREPARATION.md
 ```
 
-## ⚙️ Installation and Setup
-
-### 1. Clone the repository
-
-```bash
-git clone <YOUR_REPOSITORY_URL>
-```
-
-Navigate into the project directory:
-
-```bash
-cd ParkEase
-```
-
-### 2. Create a virtual environment
-
-```bash
-python3 -m venv .venv
-```
-
-Activate it:
-
-**macOS / Linux**
-
-```bash
-source .venv/bin/activate
-```
-
-**Windows**
-
-```bash
-.venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run the application
-
-```bash
-python3 app.py
-```
-
-Open the local address displayed in your terminal, usually:
-
-```text
-http://127.0.0.1:5000
-```
-
-The SQLite database and initial parking spots should be initialized automatically by the application.
-
-## 🚘 How to Use ParkEase
+## How to Use ParkEase
 
 1. Open the dashboard to view all 50 parking spots.
 2. Navigate to **Register Vehicle** to register a vehicle.
@@ -130,7 +76,7 @@ The SQLite database and initial parking spots should be initialized automaticall
 
 Once a vehicle is released, its parking spot becomes available again.
 
-## 🗄️ Database Design
+## Database Design
 
 ParkEase uses SQLite with two primary tables:
 
@@ -151,7 +97,7 @@ Database constraints help prevent:
 
 Released vehicle records are deleted. The application does not maintain parking history.
 
-## 🔒 Data and Application Scope
+## Data and Application Scope
 
 - Parking capacity is fixed at 50 spots.
 - Only one active vehicle can be associated with a mobile number.
@@ -161,10 +107,9 @@ Released vehicle records are deleted. The application does not maintain parking 
 - No payment system or parking history is maintained.
 - The application is intended for local use.
 
-## 🎯 Project Objective
+## Project Objective
 
 The objective of ParkEase is to demonstrate how a simple full-stack web application can combine frontend development, backend programming, database management, and software testing to solve a practical parking management problem.
 
 ---
 
-**ParkEase — Making Parking Management Simpler.** 🚗
