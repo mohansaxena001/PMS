@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Parking Dashboard</h1>
+<section class="cards">
+  <div class="card"><span class="label">Total spots</span><span class="num">{{ data.total }}</span></div>
+  <div class="card ok"><span class="label">Available</span><span class="num">{{ data.available }}</span></div>
+  <div class="card bad"><span class="label">Occupied</span><span class="num">{{ data.occupied }}</span></div>
+</section>
+
+<div class="legend"><span class="dot ok"></span> Available <span class="dot bad"></span> Occupied
+  <span class="hint">Click a red spot to see the vehicle. To park, use <a href="{{ url_for('register') }}">Register Vehicle</a>.</span></div>
+
+<section class="grid" aria-label="Parking spots">
+  {% for s in data.spots %}
+    {% if s.vehicle_id %}
+      <a class="spot occupied" href="{{ url_for('vehicle_detail', vehicle_id=s.vehicle_id) }}"
+         data-spot="{{ s.spot_number }}" title="Occupied - click for details">{{ s.spot_number }}</a>
+    {% else %}
+      <div class="spot available" title="Available - register a vehicle to use this spot">{{ s.spot_number }}</div>
+    {% endif %}
+  {% endfor %}
+</section>
+
+<dialog id="spot-dialog">
+  <h2 id="dlg-title">Spot</h2>
+  <dl id="dlg-body" class="details"></dl>
+  <div class="actions">
+    <a id="dlg-release" class="btn btn-danger" href="#">Release vehicle</a>
+    <a id="dlg-manage" class="btn" href="#">Change spot</a>
+    <button type="button" class="btn btn-ghost" id="dlg-close">Close</button>
+  </div>
+</dialog>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Register Vehicle{% endblock %}
+{% block content %}
+<h1>Register Vehicle</h1>
+<form method="post" class="panel form" novalidate>
+  {% if errors.general %}<div class="alert alert-error">{{ errors.general }}</div>{% endif %}
+
+  <label for="registration_number">Vehicle registration number</label>
+  <input id="registration_number" name="registration_number" value="{{ form.registration_number or '' }}"
+         placeholder="DL 8C AB 1234" autocomplete="off" required class="{{ 'invalid' if errors.registration_number }}">
+  <small>Enter the official number printed on the vehicle's number plate, e.g. <b>DL 8C AB 1234</b> or <b>MH 12 AB 1234</b>. Spaces and hyphens are ignored.</small>
+  {% if errors.registration_number %}<p class="field-error">{{ errors.registration_number }}</p>{% endif %}
+
+  <label for="owner_name">Owner's name</label>
+  <input id="owner_name" name="owner_name" value="{{ form.owner_name or '' }}" placeholder="Aarav Sharma" required class="{{ 'invalid' if errors.owner_name }}">
+  {% if errors.owner_name %}<p class="field-error">{{ errors.owner_name }}</p>{% endif %}
+
+  <label for="mobile_number">Mobile number</label>
+  <input id="mobile_number" name="mobile_number" value="{{ form.mobile_number or '' }}" placeholder="98765 43210" inputmode="tel" required class="{{ 'invalid' if errors.mobile_number }}">
+  <small>10-digit Indian mobile number; +91 is optional. One active vehicle per mobile number.</small>
+  {% if errors.mobile_number %}<p class="field-error">{{ errors.mobile_number }}</p>{% endif %}
+
+  <button class="btn btn-primary" type="submit">Register &amp; allocate spot</button>
+</form>
+{% endblock %}

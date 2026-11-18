@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Confirm release{% endblock %}
+{% block content %}
+<h1>Confirm release</h1>
+<section class="panel">
+  <p>Release <b>{{ vehicle.registration_number }}</b> ({{ vehicle.owner_name }}, {{ vehicle.mobile_number }}) from spot <b>{{ vehicle.spot_number }}</b>?</p>
+  <p class="muted">The vehicle record will be permanently deleted. No history is kept.</p>
+  <form method="post" action="{{ url_for('release', vehicle_id=vehicle.id) }}" class="actions">
+    <input type="hidden" name="confirm" value="yes">
+    <button class="btn btn-danger" type="submit">Yes, release vehicle</button>
+    <a class="btn btn-ghost" href="{{ url_for('vehicle_detail', vehicle_id=vehicle.id) }}">Cancel</a>
+  </form>
+</section>
+{% endblock %}

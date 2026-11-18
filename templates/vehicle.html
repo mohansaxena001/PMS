@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Vehicle {{ vehicle.registration_number }}{% endblock %}
+{% block content %}
+<h1>Vehicle details</h1>
+<section class="panel">
+  <div class="spot-badge">{{ vehicle.spot_number }}</div>
+  <dl class="details">
+    <dt>Registration number</dt><dd>{{ vehicle.registration_number }}</dd>
+    <dt>Owner's name</dt><dd>{{ vehicle.owner_name }}</dd>
+    <dt>Mobile number</dt><dd>{{ vehicle.mobile_number }}</dd>
+    <dt>Assigned spot</dt><dd>{{ vehicle.spot_number }}</dd>
+  </dl>
+</section>
+
+<section class="panel">
+  <h2>Change parking spot</h2>
+  {% if available %}
+  <form method="post" action="{{ url_for('reassign', vehicle_id=vehicle.id) }}" class="inline-form">
+    <label for="spot_number" class="sr">New spot</label>
+    <select id="spot_number" name="spot_number" required>
+      {% for s in available %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Move vehicle</button>
+  </form>
+  {% else %}<p class="muted">No other spots are available right now.</p>{% endif %}
+</section>
+
+<div class="actions">
+  <a class="btn btn-danger" href="{{ url_for('release_confirm', vehicle_id=vehicle.id) }}">Release vehicle</a>
+  <a class="btn btn-ghost" href="{{ url_for('index') }}">Back to dashboard</a>
+</div>
+{% endblock %}

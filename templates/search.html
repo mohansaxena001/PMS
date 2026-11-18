@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Search Vehicle{% endblock %}
+{% block content %}
+<h1>Search Vehicle</h1>
+<form method="get" class="panel inline-form">
+  <label for="registration_number" class="sr">Registration number</label>
+  <input id="registration_number" name="registration_number" value="{{ query }}" placeholder="DL 8C AB 1234" autocomplete="off" required>
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+<p class="muted">Enter the vehicle's official number-plate registration number. Case, spaces and hyphens are ignored.</p>
+
+{% if error %}<div class="alert alert-error">{{ error }}</div>
+{% elif searched and vehicle %}
+<section class="panel">
+  <div class="spot-badge">{{ vehicle.spot_number }}</div>
+  <dl class="details">
+    <dt>Registration number</dt><dd>{{ vehicle.registration_number }}</dd>
+    <dt>Owner's name</dt><dd>{{ vehicle.owner_name }}</dd>
+    <dt>Mobile number</dt><dd>{{ vehicle.mobile_number }}</dd>
+    <dt>Assigned spot</dt><dd>{{ vehicle.spot_number }}</dd>
+  </dl>
+  <div class="actions">
+    <a class="btn btn-danger" href="{{ url_for('release_confirm', vehicle_id=vehicle.id) }}">Release vehicle</a>
+    <a class="btn" href="{{ url_for('vehicle_detail', vehicle_id=vehicle.id) }}">Change spot</a>
+  </div>
+</section>
+{% elif searched %}
+<div class="alert alert-warning">No currently parked vehicle matches that registration number.</div>
+{% endif %}
+{% endblock %}
